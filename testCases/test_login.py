@@ -9,8 +9,8 @@ class Test_001_Login:
     baseURL = "https://www.cricket.com/"
     user_number = "9494645182"
 
-    def test_homePageTitle(self):
-        self.driver = webdriver.Chrome(executable_path="C:/Drivers/chromedriver_win32/chromedriver.exe")
+    def test_homePageTitle(self, setup):
+        self.driver = setup
         self.driver.get(self.baseURL)
         act_title = self.driver.title
         self.driver.close()
@@ -19,8 +19,8 @@ class Test_001_Login:
         else:
             assert False
 
-    def test_Login(self):
-        self.driver = webdriver.Chrome(executable_path="C:/Drivers/chromedriver_win32/chromedriver.exe")
+    def test_Login(self, setup):
+        self.driver = setup
         self.driver.get(self.baseURL)
         self.lp = Loginpage(self.driver)
         self.lp.more_Icon(self.driver)
@@ -35,12 +35,16 @@ class Test_001_Login:
         time.sleep(5)
         self.lp.clickConfirm()
         time.sleep(8)
-        act_title = self.driver.title
+        self.lp.more_Icon(self.driver)
+        time.sleep(5)
+        sign_out_text = self.lp.signOut_xpath
         self.driver.close()
-        if act_title == "Cricket Score, Match Schedule & Predictions, Latest News | Cricket.com":
+
+        if sign_out_text.is_enabled("SIGN OUT"):
             assert True
         else:
             assert False
+
 
 
 

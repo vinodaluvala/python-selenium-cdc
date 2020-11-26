@@ -8,7 +8,7 @@ driver = webdriver.Chrome(executable_path="C:\Drivers\chromedriver_win32\chromed
 driver.get("https://www.cricket.com/")
 moreIcon = driver.find_element_by_xpath("//img[contains(@alt,'moreIcon')]")
 login = driver.find_element_by_xpath("//*[@id='__next']/nav/div/div/div[2]/div[2]/div[4]/div[2]")
-
+act_title = driver.title
 
 
 action = ActionChains(driver)
@@ -25,6 +25,11 @@ driver.maximize_window()
 mobileNumber.send_keys(user_number)
 getOtp.click()
 driver.minimize_window()
+if act_title == "Cricket Score, Match Schedule & Predictions, Latest News | Cricket.com":
+            assert True
+else:
+            assert False
+            driver.close
 user_otp = input("enter 4 digit otp number")
 time.sleep(15)
 driver.maximize_window()
@@ -33,3 +38,4 @@ otp.send_keys(user_otp)
 button_confirm = driver.find_element_by_xpath("//body/div[@id='__next']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[5]/div[1]")
 time.sleep(5)
 button_confirm.click()
+driver.find_element()

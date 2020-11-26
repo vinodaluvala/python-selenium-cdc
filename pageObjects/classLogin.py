@@ -11,7 +11,7 @@ class Loginpage:
     signOut_xpath = "//div[contains(text(),'SIGN OUT')]"
     button_reSend_xpath = "//b[contains(@text, RESEND)]"
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         self.driver = driver
 
     def setMobilenumber(self, user_number):
@@ -33,4 +33,5 @@ class Loginpage:
         self.profile = driver.find_element_by_xpath("//*[@id='__next']/nav/div/div/div[2]/div[2]/div[4]/div[2]")
         self.action.move_to_element(self.moreIcon).move_to_element(self.profile).click().perform()
 
-
+    def click_sign_out(self, driver):
+        self.driver.find_element_by_xpath("//div[contains(text(),'SIGN OUT')]").click()
