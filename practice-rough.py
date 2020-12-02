@@ -1,15 +1,39 @@
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 import time
+import io
+from io import StringIO
+
+import sys
 
 
 driver = webdriver.Chrome(executable_path="C:\Drivers\chromedriver_win32\chromedriver.exe")
 
 driver.get("https://www.cricket.com/")
 time.sleep(3)
-fantasy_research_xpath = driver.find_element_by_xpath("//p[contains(text(),'Fantasy Research')]").click()
-frctitle = driver.title
-print(frctitle)
+#fantasy_research_xpath = driver.find_element_by_xpath("//p[contains(text(),'Fantasy Research')]").click()
+#frctitle = driver.title
+#print(frctitle)
+old_stdout = sys.stdout
+new_stdout = io.StringIO()
+sys.stdout = new_stdout
+
+footer_xpath = driver.find_element_by_xpath("//body/div[@id='__next']/div[2]")
+loc = footer_xpath.location
+si = footer_xpath.size
+print(loc)
+print(si)
+
+output = new_stdout.getvalue()
+sys.stdout = old_stdout
+
+print(output)
+
+if output == si:
+    print("pass")
+else:
+    print("Fail")
+
 driver.close()
 #moreIcon = driver.find_element_by_xpath("//img[contains(@alt,'moreIcon')]")
 #login = driver.find_element_by_xpath("//*[@id='__next']/nav/div/div/div[2]/div[2]/div[4]/div[2]")

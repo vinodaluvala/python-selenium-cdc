@@ -22,6 +22,8 @@ class Sanity:
     frc_upcoming_match_xpath = "//body/div[@id='__next']/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]"
     frc_live_match_xpath = "//body/div[@id='__next']/div[1]/div[1]/div[1]/div[4]/div[1]"
     frc_completed_match_xpath = "//body/div[@id='__next']/div[1]/div[1]/div[1]/div[4]/div[1]"
+    fantasy_previews_xpath = "//span[contains(text(),'FANTASY PREVIEWS')]"
+    footer_xpath = "//body/div[@id='__next']/div[2]"
 
     def __init__(self, driver):
         self.driver = driver
@@ -46,6 +48,9 @@ class Sanity:
 
     def frcCompletedClick(self):
         self.driver.find_element_by_xpath("//div[contains(text(),'COMPLETED')]").click()
+
+    def frcFantasyPreviews(self):
+        self.driver.find_elements_by_xpath("//span[contains(text(),'FANTASY PREVIEWS')]")
 
     def criclyticsClick(self):
         self.driver.find_element_by_xpath("//p[contains(text(),'Criclytics')]").click()
@@ -91,3 +96,9 @@ class Sanity:
         self.more_icon_xpath = driver.find_element_by_xpath("//img[contains(@alt,'moreIcon')]")
         self.profile_xpath = driver.find_element_by_xpath("//*[@id='__next']/nav/div/div/div[2]/div[2]/div[4]/div[2]")
         self.action.move_to_element(self.more_icon_xpath).move_to_element(self.profile_xpath).click().perform()
+
+    def dimensionFooter(self, driver):
+        footer_xpath = self.driver.find_element_by_xpath("//body/div[@id='__next']/div[2]")
+        self. loc = self.footer_xpath.location
+        self.sie = self.footer_xpath.size
+

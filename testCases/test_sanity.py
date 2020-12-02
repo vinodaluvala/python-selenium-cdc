@@ -26,13 +26,15 @@ class Test_002_Sanity:
         time.sleep(3)
         self.sa.frcUpcomingClick()
         time.sleep(3)
+        l = len(self.sa.fantasy_previews_xpath)
+        if (l>0):
+            assert True
+        else:
+            assert False
         self.sa.frcLiveClick()
         time.sleep(3)
         self.sa.frcCompletedClick()
         time.sleep(3)
-
-
-
         self.driver.close()
 
     def test_Criclytics(self, setup):
