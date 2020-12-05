@@ -1,5 +1,6 @@
 from selenium.webdriver import ActionChains
 import time
+from utilities.readProperties import Readconfig
 
 class Sanity:
 
@@ -23,6 +24,7 @@ class Sanity:
     frc_live_match_xpath = "//body/div[@id='__next']/div[1]/div[1]/div[1]/div[4]/div[1]"
     frc_completed_match_xpath = "//body/div[@id='__next']/div[1]/div[1]/div[1]/div[4]/div[1]"
     fantasy_previews_xpath = "//span[contains(text(),'FANTASY PREVIEWS')]"
+    fantasy_videos_xpath = "//div[contains(text(),'FANTASY VIDEOS')]"
     footer_xpath = "//body/div[@id='__next']/div[2]"
 
     def __init__(self, driver):
@@ -36,6 +38,7 @@ class Sanity:
 
     def frcUpcomingCheck(self):
         self.driver.find_element_by_xpath("//body/div[@id='__next']/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]").is_displayed()
+
 
     def frcLiveCheck(self):
         self.driver.find_element_by_xpath("//body/div[@id='__next']/div[1]/div[1]/div[1]/div[4]/div[1]").is_displayed()
@@ -51,6 +54,23 @@ class Sanity:
 
     def frcFantasyPreviews(self):
         self.driver.find_elements_by_xpath("//span[contains(text(),'FANTASY PREVIEWS')]")
+        p = len(self.fantasy_previews_xpath)
+        if (p > 0):
+            self.flag = True
+            return self.flag
+        else:
+            self.flag = False
+            return self.flag
+
+    def frcFantasyVideos(self):
+        self.driver.find_elements_by_xpath("//div[contains(text(),'FANTASY VIDEOS')]")
+        v = len(self.fantasy_videos_xpath)
+        if (v > 0):
+            self.flag = True
+            return self.flag
+        else:
+            self.flag = False
+            return self.flag
 
     def criclyticsClick(self):
         self.driver.find_element_by_xpath("//p[contains(text(),'Criclytics')]").click()
@@ -97,8 +117,18 @@ class Sanity:
         self.profile_xpath = driver.find_element_by_xpath("//*[@id='__next']/nav/div/div/div[2]/div[2]/div[4]/div[2]")
         self.action.move_to_element(self.more_icon_xpath).move_to_element(self.profile_xpath).click().perform()
 
-    def dimensionFooter(self, driver):
+    def dimensionFooter(self):
         footer_xpath = self.driver.find_element_by_xpath("//body/div[@id='__next']/div[2]")
-        self. loc = self.footer_xpath.location
-        self.sie = self.footer_xpath.size
+
+        #self.footerLocation = Readconfig.getfooterLocation()
+        self.footerSize = Readconfig.getfooterSize()
+        if footer_xpath.size == self.footerSize:
+            self.footflag = True
+            return self.footflag
+        else:
+            self.footflag = False
+            return self.footflag
+
+
+
 

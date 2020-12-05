@@ -11,7 +11,8 @@ driver = webdriver.Chrome(executable_path="C:\Drivers\chromedriver_win32\chromed
 
 driver.get("https://www.cricket.com/")
 time.sleep(3)
-#fantasy_research_xpath = driver.find_element_by_xpath("//p[contains(text(),'Fantasy Research')]").click()
+fantasy_research_xpath = driver.find_element_by_xpath("//p[contains(text(),'Fantasy Research')]").click()
+time.sleep(3)
 #frctitle = driver.title
 #print(frctitle)
 old_stdout = sys.stdout
@@ -28,11 +29,6 @@ output = new_stdout.getvalue()
 sys.stdout = old_stdout
 
 print(output)
-
-if output == si:
-    print("pass")
-else:
-    print("Fail")
 
 driver.close()
 #moreIcon = driver.find_element_by_xpath("//img[contains(@alt,'moreIcon')]")
