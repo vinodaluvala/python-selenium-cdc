@@ -119,16 +119,21 @@ class Sanity:
 
     def dimensionFooter(self):
         footer_xpath = self.driver.find_element_by_xpath("//body/div[@id='__next']/div[2]")
+        v = len(self.footer_xpath)
+        if (v > 0):
+            self.flag = True
+            return self.flag
+        else:
+            self.flag = False
+            return self.flag
+
+
 
         #self.footerLocation = Readconfig.getfooterLocation()
-        self.footerSize = Readconfig.getfooterSize()
-        if footer_xpath.size == self.footerSize:
-            self.footflag = True
-            return self.footflag
-        else:
-            self.footflag = False
-            return self.footflag
-
-
-
-
+        #self.footerSize = Readconfig.getfooterSize()
+        #if footer_xpath.size == self.footerSize:
+            #self.footflag = True
+            #return self.footflag
+            #else:
+            #self.footflag = False
+            #return self.footflag

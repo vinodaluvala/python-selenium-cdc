@@ -4,31 +4,37 @@ import time
 import io
 from io import StringIO
 
+
 import sys
 
 
 driver = webdriver.Chrome(executable_path="C:\Drivers\chromedriver_win32\chromedriver.exe")
+#driver = webdriver.Firefox(executable_path="C:\Drivers\geckodriver-v0.27.0-win64\geckodriver.exe")
 
 driver.get("https://www.cricket.com/")
-time.sleep(3)
+driver.execute_script("window.scrollBy(0,document.body.scrollHeight)")
+time.sleep(5)
 fantasy_research_xpath = driver.find_element_by_xpath("//p[contains(text(),'Fantasy Research')]").click()
 time.sleep(3)
+
 #frctitle = driver.title
 #print(frctitle)
-old_stdout = sys.stdout
-new_stdout = io.StringIO()
-sys.stdout = new_stdout
+#old_stdout = sys.stdout
+#new_stdout = io.StringIO()
+#sys.stdout = new_stdout
 
 footer_xpath = driver.find_element_by_xpath("//body/div[@id='__next']/div[2]")
+driver.execute_script("arguments[0].scrollIntoView();",footer_xpath)
+time.sleep(5)
 loc = footer_xpath.location
 si = footer_xpath.size
 print(loc)
 print(si)
 
-output = new_stdout.getvalue()
-sys.stdout = old_stdout
+#output = new_stdout.getvalue()
+#sys.stdout = old_stdout
 
-print(output)
+#print(output)
 
 driver.close()
 #moreIcon = driver.find_element_by_xpath("//img[contains(@alt,'moreIcon')]")
@@ -64,4 +70,4 @@ driver.close()
 #time.sleep(5)
 #button_confirm.click()
 #driver.find_element()
-
+//*[@id="__next"]/div[2]/div/div/div[3]/div[1]

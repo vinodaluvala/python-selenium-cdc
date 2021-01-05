@@ -5,11 +5,13 @@ from selenium.webdriver import ActionChains
 import time
 from utilities.readProperties import Readconfig
 
+
 class Test_002_Sanity:
 
     baseURL = Readconfig.getappURL()
     footerLocation = Readconfig.getfooterLocation()
     footerSize = Readconfig.getfooterSize()
+
 
 
     def test_homePageTitle(self, setup):
@@ -30,8 +32,15 @@ class Test_002_Sanity:
         self.sa = Sanity(self.driver)
         self.sa.frcClick()
         time.sleep(3)
-        self.sa.frcUpcomingClick()
-        time.sleep(3)
+
+        self.sa.frcUpcomingClick()              # to verify the FRC upcoming elements
+        time.sleep(5)
+        self.footer_xpath3 = self.driver.find_element_by_xpath("//body/div[@id='__next']/div[2]")
+        self.driver.execute_script("arguments[0].scrollIntoView();", self.footer_xpath3)
+        time.sleep(2)
+        self.driver.execute_script("window.scrollTo(0,-document.body.scrollHeight)")
+        time.sleep(5)
+
         self.sa.frcFantasyPreviews()
         if self.sa.flag == True:
             assert True
@@ -39,25 +48,38 @@ class Test_002_Sanity:
             self.driver.save_screenshot(".\\screenshots\\" + "test_FRC_Pre.png")
             self.driver.close()
             assert False
-        self.sa.frcFantasyVideos()
 
+        self.sa.frcFantasyVideos()
         if self.sa.flag == True:
             assert True
         else:
             self.driver.save_screenshot(".\\screenshots\\" + "test_FRC_Vids.png")
             self.driver.close()
             assert False
+
         self.sa.dimensionFooter()
-        if self.sa.footflag == True:
+        if self.sa.flag == True:
             assert True
         else:
             self.driver.save_screenshot(".\\screenshots\\" + "test_FRC_foot.png")
             self.driver.close()
             assert False
-        self.sa.frcLiveClick()
+
+        self.sa.frcLiveClick()        # to verify the FRC Live elements
         time.sleep(3)
-        self.sa.frcCompletedClick()
-        time.sleep(3)
+        self.footer_xpath1 = self.driver.find_element_by_xpath("//body/div[@id='__next']/div[2]")
+        self.driver.execute_script("arguments[0].scrollIntoView();", self.footer_xpath1)
+        time.sleep(2)
+        self.driver.execute_script("window.scrollTo(0,-document.body.scrollHeight)")
+        time.sleep(5)
+
+        self.sa.frcCompletedClick()         # to verify the FRC completed elements
+        time.sleep(5)
+        self.footer_xpath2 = self.driver.find_element_by_xpath("//body/div[@id='__next']/div[2]")
+        self.driver.execute_script("arguments[0].scrollIntoView();", self.footer_xpath2)
+        time.sleep(2)
+        self.driver.execute_script("window.scrollTo(0,-document.body.scrollHeight)")
+        time.sleep(5)
         self.driver.close()
 
     @pytest.mark.skip
